@@ -1254,7 +1254,7 @@ void options_imp::on_removeAuthTokenButton_clicked()
 
 void options_imp::handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    removeAuthTokenButton->setEnabled(authTokensView->selectedItems()->count() > 0);
+    removeAuthTokenButton->setEnabled(authTokensView->selectedItems().count() > 0);
 }
 
 void options_imp::on_addScanFolderButton_clicked()
