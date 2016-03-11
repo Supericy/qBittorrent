@@ -540,6 +540,7 @@ void options_imp::saveOptions()
             pref->setWebUiHttpsCertificate(m_sslCert);
             pref->setWebUiHttpsKey(m_sslKey);
         }
+        pref->setWebUiLoginTokens(webUiLoginTokens());
         pref->setWebUiUsername(webUiUsername());
         pref->setWebUiPassword(webUiPassword());
         pref->setWebUiLocalAuthEnabled(!checkBypassLocalAuth->isChecked());
@@ -1363,6 +1364,13 @@ bool options_imp::isWebUiEnabled() const
 quint16 options_imp::webUiPort() const
 {
     return spinWebUiPort->value();
+}
+
+QStringList options_imp::webUiLoginTokens() const
+{
+    // hard code the token for testing
+    const QStringList tokens = (QStringList() << "a5ecdbddc974f156fe0e4762044442a4");
+    return tokens;
 }
 
 QString options_imp::webUiUsername() const

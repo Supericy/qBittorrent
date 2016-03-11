@@ -296,6 +296,8 @@ public:
     void setWebUiPort(quint16 port);
     bool useUPnPForWebUIPort() const;
     void setUPnPForWebUIPort(bool enabled);
+    QStringList getWebUiLoginTokens() const;
+    void setWebUiLoginTokens(const QStringList &tokens);
     QString getWebUiUsername() const;
     void setWebUiUsername(const QString &username);
     QString getWebUiPassword() const;
