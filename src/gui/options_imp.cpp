@@ -1240,7 +1240,7 @@ int options_imp::getActionOnDblClOnTorrentFn() const
 
 void options_imp::on_addAuthTokenButton_clicked()
 {
-
+    new QListWidgetItem("test", authTokensView);
 }
 
 void options_imp::on_removeAuthTokenButton_clicked()
