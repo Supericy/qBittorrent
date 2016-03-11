@@ -54,6 +54,7 @@
 
 #include "utils/fs.h"
 #include "utils/misc.h"
+#include "utils/string.h"
 #include "settingsstorage.h"
 #include "logger.h"
 #include "preferences.h"
@@ -987,7 +988,7 @@ bool Preferences::isAuthenticationTokenValid(const QString& token)
     bool tokenAuthenticated = false;
 
     if (!token.isNull()) {
-        foreach (QString storedToken, pref->getWebUiAuthenticationTokens()) {
+        foreach (QString storedToken, getWebUiAuthenticationTokens()) {
             if (Utils::String::slowEquals(token.toUtf8(), storedToken.toUtf8())) {
                 tokenAuthenticated = true;
                 break;
