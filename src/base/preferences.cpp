@@ -982,6 +982,22 @@ void Preferences::setWebUiAuthenticationTokens(const QStringList &tokens)
     setValue("Preferences/WebUI/AuthenticationTokens", tokens);
 }
 
+bool Preferences::isAuthenticationTokenValid(const QString& token)
+{
+    bool tokenAuthenticated = false;
+
+    if (!token.isNull()) {
+        foreach (QString storedToken, pref->getWebUiAuthenticationTokens()) {
+            if (Utils::String::slowEquals(token.toUtf8(), storedToken.toUtf8())) {
+                tokenAuthenticated = true;
+                break;
+            }
+        }
+    }
+
+    return tokenAuthenticated;
+}
+
 QString Preferences::getWebUiUsername() const
 {
     return value("Preferences/WebUI/Username", "admin").toString();

@@ -172,21 +172,17 @@ void WebApplication::action_public_login()
     md5.addData(request().posts["password"].toLocal8Bit());
     QString pass = md5.result().toHex();
 
+    QString token = request().posts["token"];
+
     bool equalUser = Utils::String::slowEquals(request().posts["username"].toUtf8(), pref->getWebUiUsername().toUtf8());
     bool equalPass = Utils::String::slowEquals(pass.toUtf8(), pref->getWebUiPassword().toUtf8());
     bool userAuthenticated = equalUser && equalPass;
 
     // check if the provided token matches one of our authentication tokens
-    bool tokenAuthenticated = false;
-    foreach (QString token, pref->getWebUiAuthenticationTokens()) {
-        if (Utils::String::slowEquals(request().posts["token"].toUtf8(), token.toUtf8())) {
-            tokenAuthenticated = true;
-            break;
-        }
-    }
+    bool tokenAuthenticated = pref->isAuthenticationTokenValid(token);
 
     if (tokenAuthenticated || userAuthenticated) {
-        sessionStart();
+        sessionStart(token);
         print(QByteArray("Ok."), Http::CONTENT_TYPE_TXT);
     }
     else {

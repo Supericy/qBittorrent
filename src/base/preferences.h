@@ -298,6 +298,7 @@ public:
     void setUPnPForWebUIPort(bool enabled);
     QStringList getWebUiAuthenticationTokens() const;
     void setWebUiAuthenticationTokens(const QStringList &tokens);
+    bool isAuthenticationTokenValid(const QString& token);
     QString getWebUiUsername() const;
     void setWebUiUsername(const QString &username);
     QString getWebUiPassword() const;
