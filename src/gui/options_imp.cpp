@@ -108,7 +108,7 @@ options_imp::options_imp(QWidget *parent)
     connect(ScanFoldersModel::instance(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SLOT(enableApplyButton()));
     connect(scanFoldersView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleScanFolderViewSelectionChanged()));
 
-    // connect(authTokensView->currentItemChanged(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleAuthTokensViewChanged()));
+    connect(authTokensView, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(handleAuthTokensCurrentItemChanged(QListWidgetItem *, QListWidgetItem *)));
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(applySettings(QAbstractButton*)));
     // Languages supported
@@ -1245,12 +1245,13 @@ void options_imp::on_addAuthTokenButton_clicked()
 
 void options_imp::on_removeAuthTokenButton_clicked()
 {
-
+    QListWidgetItem *item = authTokensView->currentItem();
+    authTokensView->removeItemWidget(item);
 }
 
-void options_imp::handleAuthTokensViewSelectionChanged()
+void options_imp::handleAuthTokensCurrentItemChanged()
 {
-
+    removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
 }
 
 void options_imp::on_addScanFolderButton_clicked()
