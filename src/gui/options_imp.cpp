@@ -305,6 +305,10 @@ options_imp::options_imp(QWidget *parent)
     // Adapt size
     show();
     loadWindowState();
+
+    // initialize rand for authentication tokens
+    srand(time(0));
+
 }
 
 void options_imp::initializeLanguageCombo()
@@ -880,6 +884,11 @@ void options_imp::loadOptions()
     textWebUiPassword->setText(pref->getWebUiPassword());
     checkBypassLocalAuth->setChecked(!pref->isWebUiLocalAuthEnabled());
 
+    // initialize authentication tokens in ui
+    foreach (QString token, pref->getWebUiAuthenticationTokens()) {
+        new QListWidgetItem(token, authTokensView);
+    }
+
     checkDynDNS->setChecked(pref->isDynDNSEnabled());
     comboDNSService->setCurrentIndex((int)pref->getDynDNSService());
     domainNameTxt->setText(pref->getDynDomainName());
@@ -1240,8 +1249,6 @@ int options_imp::getActionOnDblClOnTorrentFn() const
 
 void options_imp::on_addAuthTokenButton_clicked()
 {
-    srand(time(0));
-
     QByteArray data = QByteArray();
     for (int i = 0; i < 512; i++) {
         data.append((char) rand());
