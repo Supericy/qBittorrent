@@ -155,7 +155,7 @@ private:
     int getMaxActiveTorrents() const;
     bool isWebUiEnabled() const;
     quint16 webUiPort() const;
-    QStringList webUiLoginTokens() const;
+    QStringList webUiAuthenticationTokens() const;
     QString webUiUsername() const;
     QString webUiPassword() const;
     QSize sizeFittingScreen() const;

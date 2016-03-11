@@ -972,14 +972,14 @@ void Preferences::setUPnPForWebUIPort(bool enabled)
     setValue("Preferences/WebUI/UseUPnP", enabled);
 }
 
-QStringList Preferences::getWebUiLoginTokens() const
+QStringList Preferences::getWebUiAuthenticationTokens() const
 {
-    return value("Preferences/WebUI/LoginTokens").toStringList();
+    return value("Preferences/WebUI/AuthenticationTokens").toStringList();
 }
 
-void Preferences::setWebUiLoginTokens(const QStringList &tokens)
+void Preferences::setWebUiAuthenticationTokens(const QStringList &tokens)
 {
-    setValue("Preferences/WebUI/LoginTokens", tokens);
+    setValue("Preferences/WebUI/AuthenticationTokens", tokens);
 }
 
 QString Preferences::getWebUiUsername() const

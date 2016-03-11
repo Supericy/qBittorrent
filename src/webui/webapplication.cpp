@@ -174,20 +174,18 @@ void WebApplication::action_public_login()
 
     bool equalUser = Utils::String::slowEquals(request().posts["username"].toUtf8(), pref->getWebUiUsername().toUtf8());
     bool equalPass = Utils::String::slowEquals(pass.toUtf8(), pref->getWebUiPassword().toUtf8());
+    bool userAuthenticated = equalUser && equalPass;
 
-    // check if the provided token matches one of our login tokens
-    bool equalToken = false;
-    foreach (QString token, pref->getWebUiLoginTokens()) {
+    // check if the provided token matches one of our authentication tokens
+    bool tokenAuthenticated = false;
+    foreach (QString token, pref->getWebUiAuthenticationTokens()) {
         if (Utils::String::slowEquals(request().posts["token"].toUtf8(), token.toUtf8())) {
-            equalToken = true;
+            tokenAuthenticated = true;
             break;
         }
     }
 
-    bool validUser = equalUser && equalPass;
-    bool validToken = equalToken;
-
-    if (validUser || validToken) {
+    if (tokenAuthenticated || userAuthenticated) {
         sessionStart();
         print(QByteArray("Ok."), Http::CONTENT_TYPE_TXT);
     }
