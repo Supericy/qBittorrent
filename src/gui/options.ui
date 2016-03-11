@@ -2897,7 +2897,7 @@
 
                        <layout class="QHBoxLayout" name="horizontalLayout_16">
                            <item>
-                               <widget class="QListView" name="authTokensView">
+                               <widget class="QListWidget" name="authTokensView">
                                    <property name="sizePolicy">
                                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                            <horstretch>0</horstretch>
