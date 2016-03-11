@@ -1240,7 +1240,17 @@ int options_imp::getActionOnDblClOnTorrentFn() const
 
 void options_imp::on_addAuthTokenButton_clicked()
 {
-    new QListWidgetItem("test", authTokensView);
+    srand(time(0));
+
+    QByteArray data = QByteArray();
+    for (int i = 0; i < 512; i++) {
+        data.append((char) rand());
+    }
+
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(data);
+
+    new QListWidgetItem(md5.result().toHex(), authTokensView);
 }
 
 void options_imp::on_removeAuthTokenButton_clicked()
@@ -1254,7 +1264,7 @@ void options_imp::on_removeAuthTokenButton_clicked()
 
 void options_imp::handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    removeAuthTokenButton->setEnabled(authTokensView->selectedItems().count() > 0);
+    removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
 }
 
 void options_imp::on_addScanFolderButton_clicked()
@@ -1392,8 +1402,12 @@ quint16 options_imp::webUiPort() const
 
 QStringList options_imp::webUiAuthenticationTokens() const
 {
-    // hard code the token for testing
-    const QStringList tokens = (QStringList() << "a5ecdbddc974f156fe0e4762044442a4");
+    QStringList tokens = QStringList();
+
+    for (int i = 0; i < authTokensView->count(); i++) {
+        tokens << authTokensView->item(i)->text();
+    }
+
     return tokens;
 }
 
