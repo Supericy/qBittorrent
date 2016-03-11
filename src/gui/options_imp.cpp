@@ -108,6 +108,8 @@ options_imp::options_imp(QWidget *parent)
     connect(ScanFoldersModel::instance(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SLOT(enableApplyButton()));
     connect(scanFoldersView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleScanFolderViewSelectionChanged()));
 
+    // connect(authTokensView->currentItemChanged(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleAuthTokensViewChanged()));
+
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(applySettings(QAbstractButton*)));
     // Languages supported
     initializeLanguageCombo();
@@ -198,6 +200,9 @@ options_imp::options_imp(QWidget *parent)
     connect(mailNotifPassword, SIGNAL(textChanged(QString)), this, SLOT(enableApplyButton()));
     connect(autoRunBox, SIGNAL(toggled(bool)), this, SLOT(enableApplyButton()));
     connect(autoRun_txt, SIGNAL(textChanged(QString)), this, SLOT(enableApplyButton()));
+
+    connect(addAuthTokenButton, SIGNAL(clicked()), this, SLOT(enableApplyButton()));
+    connect(removeAuthTokenButton, SIGNAL(clicked()), this, SLOT(enableApplyButton()));
 
     const QString autoRunStr = QString::fromUtf8("%1\n    %2\n    %3\n    %4\n    %5\n    %6\n    %7\n    %8\n    %9\n    %10\n%11")
                                .arg(tr("Supported parameters (case sensitive):"))
@@ -1231,6 +1236,21 @@ int options_imp::getActionOnDblClOnTorrentFn() const
     if (actionTorrentFnOnDblClBox->currentIndex() < 1)
         return 0;
     return actionTorrentFnOnDblClBox->currentIndex();
+}
+
+void options_imp::on_addAuthTokenButton_clicked()
+{
+
+}
+
+void options_imp::on_removeAuthTokenButton_clicked()
+{
+
+}
+
+void options_imp::handleAuthTokensViewSelectionChanged()
+{
+
 }
 
 void options_imp::on_addScanFolderButton_clicked()

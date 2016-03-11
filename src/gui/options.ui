@@ -2897,7 +2897,7 @@
 
                        <layout class="QHBoxLayout" name="horizontalLayout_16">
                            <item>
-                               <widget class="QTreeView" name="authenticationTokensView">
+                               <widget class="QListView" name="authTokensView">
                                    <property name="sizePolicy">
                                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                            <horstretch>0</horstretch>
@@ -2910,38 +2910,25 @@
                                            <height>150</height>
                                        </size>
                                    </property>
-                                   <property name="editTriggers">
-                                       <set>QAbstractItemView::AllEditTriggers</set>
-                                   </property>
-                                   <property name="selectionMode">
-                                       <enum>QAbstractItemView::SingleSelection</enum>
-                                   </property>
-                                   <property name="selectionBehavior">
-                                       <enum>QAbstractItemView::SelectRows</enum>
-                                   </property>
-                                   <property name="textElideMode">
-                                       <enum>Qt::ElideNone</enum>
-                                   </property>
-                                   <property name="rootIsDecorated">
-                                       <bool>false</bool>
-                                   </property>
-                                   <attribute name="headerDefaultSectionSize">
-                                       <number>80</number>
-                                   </attribute>
-                                   <attribute name="headerStretchLastSection">
-                                       <bool>false</bool>
-                                   </attribute>
                                </widget>
                            </item>
                            <item>
                                <layout class="QVBoxLayout" name="verticalLayout_37">
                                    <item>
-                                       <widget class="QPushButton" name="newTokenButton">
+                                       <widget class="QPushButton" name="addAuthTokenButton">
                                            <property name="text">
-                                               <string>New Token</string>
+                                               <string>Add</string>
                                            </property>
                                        </widget>
                                    </item>
+                                   <item>
+                                       <widget class="QPushButton" name="removeAuthTokenButton">
+                                           <property name="text">
+                                               <string>Remove</string>
+                                           </property>
+                                       </widget>
+                                   </item>
+
                                    <item>
                                        <spacer name="verticalSpacer_6">
                                            <property name="orientation">

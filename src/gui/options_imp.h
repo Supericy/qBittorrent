@@ -96,6 +96,10 @@ private slots:
     void on_registerDNSBtn_clicked();
     void setLocale(const QString &locale);
 
+    void on_addAuthTokenButton_clicked();
+    void on_removeAuthTokenButton_clicked();
+    void handleAuthTokensViewSelectionChanged();
+
 private:
     // Methods
     void saveOptions();
