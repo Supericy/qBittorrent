@@ -1245,13 +1245,16 @@ void options_imp::on_addAuthTokenButton_clicked()
 
 void options_imp::on_removeAuthTokenButton_clicked()
 {
-    QListWidgetItem *item = authTokensView->currentItem();
-    authTokensView->removeItemWidget(item);
+    QList<QListWidgetItem *> selectedItems = authTokensView->selectedItems();
+
+    foreach (QListWidgetItem *item, selectedItems) {
+        authTokensView->takeItem(authTokensView->row(item));
+    }
 }
 
 void options_imp::handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
+    removeAuthTokenButton->setEnabled(authTokensView->selectedItems()->count() > 0);
 }
 
 void options_imp::on_addScanFolderButton_clicked()
