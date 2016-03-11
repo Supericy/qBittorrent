@@ -1249,7 +1249,7 @@ void options_imp::on_removeAuthTokenButton_clicked()
     authTokensView->removeItemWidget(item);
 }
 
-void options_imp::handleAuthTokensCurrentItemChanged()
+void options_imp::handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
 }
