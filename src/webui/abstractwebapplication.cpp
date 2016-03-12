@@ -352,7 +352,7 @@ void AbstractWebApplication::printFile(const QString& path)
     print(data, type);
 }
 
-bool AbstractWebApplication::sessionStart(const QString& token = QString())
+bool AbstractWebApplication::sessionStart(const QString& token)
 {
     if (session_ == 0) {
         session_ = new WebSession(generateSid(), token);
