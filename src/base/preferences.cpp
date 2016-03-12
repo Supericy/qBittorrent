@@ -983,7 +983,7 @@ void Preferences::setWebUiAuthenticationTokens(const QStringList &tokens)
     setValue("Preferences/WebUI/AuthenticationTokens", tokens);
 }
 
-bool Preferences::isAuthenticationTokenValid(const QString& token)
+bool Preferences::isAuthenticationTokenValid(const QString& token) const
 {
     bool tokenAuthenticated = false;
 
