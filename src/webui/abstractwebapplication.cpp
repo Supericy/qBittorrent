@@ -76,6 +76,11 @@ struct WebSession
     {
         timestamp = QDateTime::currentDateTime().toTime_t();
     }
+
+    bool hasAuthenticationToken()
+    {
+        return !token.isNull();
+    }
 };
 
 // AbstractWebApplication
@@ -109,8 +114,11 @@ Http::Response AbstractWebApplication::processRequest(const Http::Request &reque
 
     // if the session was authenticated using a token, then let's check if it's
     // still a valid token
-    if (!session_->token.isNull() && !Preferences::instance()->isAuthenticationTokenValid(session_->token))
-        sessionEnd();
+    if (sessionActive() && session_->hasAuthenticationToken()) {
+        if (!Preferences::instance()->isAuthenticationTokenValid(session_->token)) {
+            sessionEnd();
+        }
+    }
 
     if (isBanned()) {
         status(403, "Forbidden");
