@@ -108,7 +108,7 @@ options_imp::options_imp(QWidget *parent)
     connect(ScanFoldersModel::instance(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SLOT(enableApplyButton()));
     connect(scanFoldersView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleScanFolderViewSelectionChanged()));
 
-    connect(authTokensView, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(handleAuthTokensCurrentItemChanged()));
+    connect(authTokensView, SIGNAL(itemSelectionChanged()), this, SLOT(handleAuthTokensCurrentItemChanged()));
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(applySettings(QAbstractButton*)));
     // Languages supported
