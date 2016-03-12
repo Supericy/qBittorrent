@@ -1274,7 +1274,7 @@ void options_imp::on_removeAuthTokenButton_clicked()
 
 void options_imp::handleAuthTokensCurrentItemChanged()
 {
-    removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
+    removeAuthTokenButton->setEnabled(!authTokensView->selectedItems().isEmpty());
 }
 
 void options_imp::on_addScanFolderButton_clicked()
