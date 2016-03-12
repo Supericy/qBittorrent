@@ -98,7 +98,7 @@ private slots:
 
     void on_addAuthTokenButton_clicked();
     void on_removeAuthTokenButton_clicked();
-    void handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void handleAuthTokensCurrentItemChanged();
 
 private:
     // Methods

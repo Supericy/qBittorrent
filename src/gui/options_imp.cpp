@@ -108,7 +108,7 @@ options_imp::options_imp(QWidget *parent)
     connect(ScanFoldersModel::instance(), SIGNAL(dataChanged(QModelIndex, QModelIndex)), this, SLOT(enableApplyButton()));
     connect(scanFoldersView->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(handleScanFolderViewSelectionChanged()));
 
-    connect(authTokensView, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(handleAuthTokensCurrentItemChanged(QListWidgetItem *, QListWidgetItem *)));
+    connect(authTokensView, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(handleAuthTokensCurrentItemChanged()));
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(applySettings(QAbstractButton*)));
     // Languages supported
@@ -888,6 +888,7 @@ void options_imp::loadOptions()
     foreach (QString token, pref->getWebUiAuthenticationTokens()) {
         new QListWidgetItem(token, authTokensView);
     }
+    handleAuthTokensCurrentItemChanged();
 
     checkDynDNS->setChecked(pref->isDynDNSEnabled());
     comboDNSService->setCurrentIndex((int)pref->getDynDNSService());
@@ -1267,9 +1268,11 @@ void options_imp::on_removeAuthTokenButton_clicked()
     foreach (QListWidgetItem *item, selectedItems) {
         authTokensView->takeItem(authTokensView->row(item));
     }
+
+    handleAuthTokensCurrentItemChanged();
 }
 
-void options_imp::handleAuthTokensCurrentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void options_imp::handleAuthTokensCurrentItemChanged()
 {
     removeAuthTokenButton->setEnabled(authTokensView->count() > 0);
 }
